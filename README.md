@@ -42,7 +42,7 @@ A production-grade RESTful API for managing users built with TypeScript, Postgre
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/user-management-api.git
+   git clone https://github.com/Ifeanyi-Ibe/user-management-api.git
    cd user-management-api
 
 ### Dependency Installation
