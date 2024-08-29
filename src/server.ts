@@ -3,7 +3,7 @@ import express from 'express';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { AppDataSource } from './config/dataSource';
-import { UserController } from './controllers/User';
+import { UserController } from './user/user.controller';
 // import { createUserIndex } from './config/elasticSearch';
 import { swaggerOptions } from './config/swagger';
 

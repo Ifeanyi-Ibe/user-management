@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../config/dataSource';
-import { User } from '../entities/User';
+import { User } from './user.entity';
 // import { esClient } from '../config/elasticSearch';
 
 const userRepository = AppDataSource.getRepository(User);
