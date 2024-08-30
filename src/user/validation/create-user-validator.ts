@@ -49,7 +49,8 @@ export const handleValidationErrors = (
   ): void => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({ errors: errors.array() });
+      const errorArray = errors.array().map((error: { msg: string; }) => error.msg);
+      res.status(400).json({ hasErrors: true, errors: errorArray });
       return;
     }
     next();

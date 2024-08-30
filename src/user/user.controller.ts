@@ -1,16 +1,20 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { AppDataSource } from '../config/dataSource';
 import { User } from './user.entity';
 // import { esClient } from '../config/elasticSearch';
+import { UserService } from './user.service';
+import { NotFoundError } from '../errors/notFound';
 
 const userRepository = AppDataSource.getRepository(User);
 
 export class UserController {
-  static async createUser(req: Request, res: Response) {
+  static async createUser(req: Request, res: Response, next: NextFunction) {
     try {
-      const { username, password, email, firstname, lastname, bio } = req.body;
-      const user = userRepository.create({ username, password, email, firstname, lastname, bio });
-      await userRepository.save(user);
+      // const { username, password, email, firstname, lastname, bio } = req.body;
+      // const user = userRepository.create({ username, password, email, firstname, lastname, bio });
+      // await userRepository.save(user);
+
+      const user = UserService.createUser(req.body);
       
       // Index user in Elasticsearch
       // await esClient.index({
@@ -21,8 +25,20 @@ export class UserController {
 
       res.status(201).json(user);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error creating user', error });
+      next(error);
+    }
+  }
+
+  static async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = await UserService.login(req.body);
+
+      if(!user) {
+        throw new NotFoundError("User does not exist");
+      }
+      res.status(201).json(user);
+    } catch (error) {
+      next(error);
     }
   }
 

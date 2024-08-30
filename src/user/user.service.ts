@@ -10,11 +10,7 @@ export class UserService {
     } 
 
     static async login({email, password}: LoginDto): Promise<User | null> {
-        const user = await userRepository.findOneBy({email});
-        if (!user) {
-          return null;
-        }
-    
+        const user = await userRepository.findOneBy({email});    
         // if (await argon2.verify(user.password, password)) {
         //   return user;
         // }

@@ -1,5 +1,6 @@
 import express from 'express';
 import { validateCreateUserRequest, handleValidationErrors } from './validation/create-user-validator';
+import { validateLoginRequest  } from './validation/login-request-validator';
 import { UserController } from './user.controller'
 
 const router = express.Router();
@@ -47,6 +48,6 @@ router.get('/', UserController.getUsers);
 
 router.put('/:id', UserController.updateUser);
 router.delete('/:id', UserController.deleteUser);
-
+router.post('/login', validateLoginRequest, handleValidationErrors, UserController.login);
 
 export default router;
