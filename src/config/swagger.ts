@@ -7,6 +7,11 @@ export const swaggerOptions = {
         description: 'API for managing users',
       },
     },
-    apis: ['./src/server.ts'],
+    servers: [
+      {
+        url: 'http://localhost:3000', // Update with your server URL
+      },
+    ],
+    apis: ["src/**/**.routes{.ts,.js}"],
 };
   

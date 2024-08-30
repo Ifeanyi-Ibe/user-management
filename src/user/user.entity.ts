@@ -5,6 +5,12 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  firstname: string;
+
+  @Column()
+  lastname: string;
+
   @Column({ unique: true })
   username: string;
 
@@ -16,4 +22,7 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @Column()
+  bio: string;
 }

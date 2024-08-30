@@ -8,8 +8,8 @@ const userRepository = AppDataSource.getRepository(User);
 export class UserController {
   static async createUser(req: Request, res: Response) {
     try {
-      const { username, password, email } = req.body;
-      const user = userRepository.create({ username, password, email });
+      const { username, password, email, firstname, lastname, bio } = req.body;
+      const user = userRepository.create({ username, password, email, firstname, lastname, bio });
       await userRepository.save(user);
       
       // Index user in Elasticsearch

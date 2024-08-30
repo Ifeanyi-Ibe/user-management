@@ -1,14 +1,16 @@
 import { User } from './user.entity';
 import { LoginDto } from './dto/login-dto';
 import { AppDataSource } from '../config/dataSource';
+import { CreateUserDto } from './dto/create-user';
+const userRepository = AppDataSource.getRepository(User);
 
 export class UserService {
-    async findAll(): Promise<User[]> {
-        return await AppDataSource.getRepository(User).find();
-    }
+    static async getUsers(): Promise<User[]> {
+        return await userRepository.find();
+    } 
 
-    async findOne({email, password}: LoginDto): Promise<User | null> {
-        const user = await AppDataSource.getRepository(User).findOneBy({email});
+    static async login({email, password}: LoginDto): Promise<User | null> {
+        const user = await userRepository.findOneBy({email});
         if (!user) {
           return null;
         }
@@ -20,5 +22,10 @@ export class UserService {
         // return null;
     }
     
-    
+    static async createUser({ username, password, email, firstname, lastname, bio }: CreateUserDto): Promise<User> {
+        const user = userRepository.create({ username, password, email, firstname, lastname, bio });
+        await userRepository.save(user);
+
+        return user;
+    }
 }  
