@@ -48,6 +48,8 @@ router.get('/', UserController.getUsers);
 
 router.put('/:id', UserController.updateUser);
 router.delete('/:id', UserController.deleteUser);
+router.post('/create-profile', UserController.saveUserProfile);
+router.post('/update-profile', UserController.updateProfile);
 router.post('/login', validateLoginRequest, handleValidationErrors, UserController.login);
 
 export default router;
